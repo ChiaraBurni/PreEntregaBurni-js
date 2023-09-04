@@ -44,12 +44,13 @@ body{
 }
 
 .form-btn {
-    width: 12rem;
+    width: 100%;
     height: auto;
     border-radius: 5px;
     background: #f09c43;
     color: #fff;
     transition: all 0.3s ease-in-out;
+    margin: 1rem 0;
 }
 
 .form-btn:hover {

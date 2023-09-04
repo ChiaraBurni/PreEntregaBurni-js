@@ -17,6 +17,7 @@ let tarjetas = [];
 const form = document.getElementById("form");
 const tipoImpresion = document.getElementById("tipoImpresion");
 const divTerminacion = document.getElementById("divTerminacion");
+const btnBorrar = document.getElementById("btnBorrar");
 
 
 form.addEventListener('submit', (e) => {
@@ -50,77 +51,51 @@ form.addEventListener('submit', (e) => {
     localStorage.setItem('tarjetas', JSON.stringify(tarjetas));
 
     //mostrar precio total!!
-    document.getElementById('precioTotal').textContent = `Precio Total: $${precioTotal.toFixed(2)}`;
+    document.getElementById('precioTotal').textContent = `Precio Total: $${precioTotal}`;
 });
 
-// dependiendo tipo de impresion seleccionada, se crean elementos html para seleccionar el tipo de impresion
+
+//terminacion
+const terminacionSelect = document.createElement("select");
+terminacionSelect.setAttribute("name", "terminacion");
+terminacionSelect.setAttribute("id", "terminacion");
+//teminacion label
+const labelTerminacion = document.createElement("label");
+labelTerminacion.setAttribute("for", "terminacion");
+labelTerminacion.textContent = "Terminación:";
+
 tipoImpresion.addEventListener("input", () => {
+    //limpiar opciones
+    terminacionSelect.innerHTML = "";
 
     if (tipoImpresion.value === "laser") {
-        // crear elementos para impresión láser
-        const divFormGroup = document.createElement("div");
-        divFormGroup.classList.add("form-group");
-
-        //label
-        const label = document.createElement("label");
-        label.setAttribute("for", "terminacion");
-        label.textContent = "Terminación:";
-
-        //select
-        const select = document.createElement("select");
-        select.setAttribute("name", "terminacion");
-        select.setAttribute("id", "terminacion");
-
-        // opciones de terminacion
-        const opcion1 = document.createElement("option");
-        opcion1.setAttribute("value", "br");
-        opcion1.textContent = "Brillante";
-
-        const opcion2 = document.createElement("option");
-        opcion2.setAttribute("value", "mate");
-        opcion2.textContent = "Mate";
-
-        // append al select
-        select.appendChild(opcion1);
-        select.appendChild(opcion2);
-
-        //se agregan a un div vacio en el html
-        divFormGroup.appendChild(label);
-        divFormGroup.appendChild(select);
-
-        divTerminacion.appendChild(divFormGroup);
-
-    } else if (tipoImpresion.value === "offset") {
-        //terminación para impresión offset
-        const divFormGroup = document.createElement("div");
-        divFormGroup.classList.add("form-group");
-
-        //label
-        const label = document.createElement("label");
-        label.setAttribute("for", "terminacion");
-        label.textContent = "Terminación:";
-
-        //select
-        const select = document.createElement("select");
-        select.setAttribute("name", "terminacion");
-        select.setAttribute("id", "terminacion");
-
-        //opciones
-        const opciones = ["Brillante", "Mate", "UV Brillante", "OPP Mate", "OPP Mate + UV Sectorizado"];
-
+        //impresión láser: brillante y mate
+        const opciones = ["Brillante", "Mate"];
         opciones.forEach((opcionTexto) => {
             const opcion = document.createElement("option");
-            opcion.setAttribute("value", opcionTexto.toLowerCase().replace(/\s+/g, '-'));
             opcion.textContent = opcionTexto;
-            select.appendChild(opcion);
+            terminacionSelect.appendChild(opcion);
         });
 
-        // append elementos al div
-        divFormGroup.appendChild(label);
-        divFormGroup.appendChild(select);
-        divTerminacion.appendChild(divFormGroup);
+    } else if (tipoImpresion.value === "offset") {
+        //impresión offset: brillante, mate, uv brillante, opp mate y opp mate-uv sectprizado
+        const opciones = ["Brillante", "Mate", "UV Brillante", "OPP Mate", "OPP Mate + UV Sectorizado"];
+        opciones.forEach((opcionTexto) => {
+            const opcion = document.createElement("option");
+            opcion.textContent = opcionTexto;
+            terminacionSelect.appendChild(opcion);
+        });
     }
+});
 
+divTerminacion.appendChild(labelTerminacion);
+divTerminacion.appendChild(terminacionSelect);
+
+// borrar formulario
+btnBorrar.addEventListener('click', () => {
+    form.reset(); 
+    //borrar precio!!
+    document.getElementById('precioTotal').textContent = `Precio Total: $0`;
 });
 
 // cargar datos desde localStorage cuando se carga la página
