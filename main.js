@@ -38,6 +38,9 @@ form.addEventListener('submit', (e) => {
     let precioUnitario = tipoImpresion === 'offset' ? PRECIO_OFFSET: PRECIO_LASER;
     if (cantidad > 1000) {
         precioUnitario *= 0.80; //descuelto unitario por caantidad mayor a 1000
+    }else{ //evitar cantidad negativa
+        cantidad < 0
+        precioUnitario = 0
     }
     const precioTotal = cantidad * precioUnitario;
 
@@ -50,7 +53,7 @@ form.addEventListener('submit', (e) => {
     //guarda la lista de tarjetas en el localstorage
     localStorage.setItem('tarjetas', JSON.stringify(tarjetas));
 
-    //mostrar precio total!!
+    //mostrar precio total!! quite el .00 del precio
     document.getElementById('precioTotal').textContent = `Precio Total: $${precioTotal}`;
 });
 
