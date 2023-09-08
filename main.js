@@ -35,13 +35,17 @@ form.addEventListener('submit', (e) => {
     const PRECIO_LASER = 20;
     const PRECIO_OFFSET = 40; 
     
-    let precioUnitario = tipoImpresion === 'offset' ? PRECIO_OFFSET: PRECIO_LASER;
-    if (cantidad > 1000) {
+    let precioUnitario;
+    
+    if (cantidad > 0) {
+        precioUnitario = tipoImpresion === 'offset' ? PRECIO_OFFSET: PRECIO_LASER;
+    if (cantidad >= 1000) {
         precioUnitario *= 0.80; //descuelto unitario por caantidad mayor a 1000
-    }else{ //evitar cantidad negativa
-        cantidad < 0
-        precioUnitario = 0
     }
+    } else { //evitar cantidades negativas!!
+        precioUnitario = null;
+    }
+    //calcular precio total
     const precioTotal = cantidad * precioUnitario;
 
     //objeto con datos ingresados en el formulario
@@ -107,4 +111,5 @@ document.addEventListener('DOMContentLoaded', () => {
     if (localStorage.getItem('tarjetas')) {
         tarjetas = JSON.parse(localStorage.getItem('tarjetas'));
     }
+    console.log(tarjetas)
 });
