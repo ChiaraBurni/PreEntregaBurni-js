@@ -24,27 +24,43 @@ body{
 /*formulario*/
 .form{
     display: flex;
-    align-items: center;
-    justify-content: center;
-    
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-bottom: .5rem;
+    max-width: 35rem;
+    margin: 0 auto;
+}
+.form-step {
+    display: none;
+  }
+
+.card{
+    max-width: 100%;
+    padding: 3rem;
+    margin: 2rem auto;
+    border-radius: 0.5rem;
+    box-shadow: 0px 0px 0.7rem black;
+    display: block;
 }
 
-.formulario-form{
-    position: relative;
-    max-width: 60rem;
+.pedidos{
+    max-width: 100%;
     padding: 3rem;
-    margin: 1rem;
+    margin: 2rem auto;
     border-radius: 0.5rem;
     box-shadow: 0px 0px 0.7rem black;
 }
 
-.formulario-form h3 {
-    margin-bottom: 2rem;
-    color: black;
+.input {
+    background: none;
+    border: none;
+    border: .1rem solid #e0e0e0;
+    border-radius: 0;
+    box-shadow: none;
+    margin: .5rem;
 }
 
 .form-btn {
-    width: 100%;
     height: auto;
     border-radius: 5px;
     background: #f09c43;
@@ -57,17 +73,8 @@ body{
     background: #EE8F33;
 }
 
-.form-casilla {
-    background: none;
-    border: none;
-    border: 0.1rem solid #e0e0e0;
-    border-radius: 0;
-    box-shadow: none;
-}
-
 .form p{
     text-decoration: underline;
-    margin: 0 1rem;
 }
 
 /*Footer*/
@@ -78,3 +85,4 @@ body{
     height: 1rem;
     width: auto;
 }
+
