@@ -97,13 +97,12 @@ fetch('precios.json')
 
             //seguir generando hasta encontrar uno que no se repita
             do {
-                numeroPedido = Math.floor(Math.random() * 90000) + 10000;
+                numeroPedido = Math.floor(Math.random() * 9000000) + 1000000;
             } while (pedidosExistentes.includes(numeroPedido));
 
             return numeroPedido;
         }
-
-
+        // Boton Siguiente
         btnSiguiente.addEventListener('click', () => {
             const cantidad = parseInt(document.getElementById('cantidad').value);
 
@@ -115,26 +114,53 @@ fetch('precios.json')
                     confirmButtonText: 'OK',
                     confirmButtonColor: '#EE8F33'
                 });
-            } else {
-                const tipo = tipoImpresion.value;
-                const precioTotal = CalcularPrecioTotal(tipo, cantidad, PRECIO_LASER, PRECIO_OFFSET);
-
+            } else if (tipoImpresion.value === "") {
                 Swal.fire({
-                    title: 'El precio total es:',
-                    text: `$${precioTotal}`,
+                    title: '¡Error!',
+                    text: 'Por favor, selecciona un tipo de impresión antes de continuar.',
+                    icon: 'error',
                     confirmButtonText: 'OK',
                     confirmButtonColor: '#EE8F33'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        document.getElementById('precioTotal').innerHTML = `<strong>Precio Total: $${precioTotal}</strong>`;
-                        cotizacionSection.style.display = 'none';
-                        encargoSection.style.display = 'block';
+                });
+            } else {
+                const terminacionRadios = document.getElementsByName('terminacion');
+                let terminacionSeleccionada = false;
+
+                terminacionRadios.forEach((radio) => {
+                    if (radio.checked) {
+                        terminacionSeleccionada = true;
                     }
                 });
+
+                if (!terminacionSeleccionada) {
+                    Swal.fire({
+                        title: '¡Error!',
+                        text: 'Por favor, selecciona una terminación antes de continuar.',
+                        icon: 'error',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#EE8F33'
+                    });
+                } else {
+                    const tipo = tipoImpresion.value;
+                    const precioTotal = CalcularPrecioTotal(tipo, cantidad, PRECIO_LASER, PRECIO_OFFSET);
+
+                    Swal.fire({
+                        title: 'El precio total es:',
+                        text: `$${precioTotal}`,
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#EE8F33'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            document.getElementById('precioTotal').innerHTML = `Precio Total: $${precioTotal}`;
+                            cotizacionSection.style.display = 'none';
+                            encargoSection.style.display = 'block';
+                        }
+                    });
+                }
             }
         });
 
-
+        // Boton Atras
         btnAtras.addEventListener('click', () => {
             cotizacionSection.style.display = 'block';
             encargoSection.style.display = 'none';
