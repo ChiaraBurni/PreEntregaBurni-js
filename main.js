@@ -79,7 +79,7 @@ fetch('precios.json')
             return precioUnitario;
         }
 
-        //calcular el precio total - calcularpreciototal debe estar definida antes de la clase contructora...
+        //calcular el precio total
         function CalcularPrecioTotal(tipo, cantidad, precioLaser, precioOffset) {
             return cantidad * CalcularPrecioUnitario(tipo, cantidad, precioLaser, precioOffset);
         }
@@ -98,10 +98,10 @@ fetch('precios.json')
             return numeroPedido;
         }
 
-        document.getElementById('btnCalcular').addEventListener('click', () => {
+
+        btnSiguiente.addEventListener('click', () => {
             const cantidad = parseInt(document.getElementById('cantidad').value);
-            //Evitar cantidades negativas o iguales a 0.
-            //uso de libreria sweetalert
+
             if (isNaN(cantidad) || cantidad <= 0) {
                 Swal.fire({
                     title: 'Error!',
@@ -117,40 +117,27 @@ fetch('precios.json')
                     title: 'El precio total es:',
                     text: `$${precioTotal}`,
                     confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById('precioTotal').innerHTML = `<strong>Precio Total: $${precioTotal}</strong>`;
+                        cotizacionSection.style.display = 'none';
+                        encargoSection.style.display = 'block';
+                    }
                 });
-
-                // Habilita el botón "Siguiente" y actualiza el precio en el elemento HTML
-                document.getElementById('btnSiguiente').disabled = false;
-                document.getElementById('precioTotal').innerHTML = `<strong>Precio Total: $${precioTotal}</strong>`;
             }
         });
+       
 
 
-        btnSiguiente.addEventListener('click', () => {
-            //Evitar cantidades negativas o iguales a 0.
-            //uso de libreria sweetalert
 
-            const cantidad = parseInt(document.getElementById('cantidad').value);
-            if (cantidad <= 0) {
-                Swal.fire({
-                    title: 'Error!',
-                    text: 'Cantidad Invalida. Ingrese una cantidad mayor a 0',
-                    icon: 'error',
-                    confirmButtonText: 'OK'
-                });
-                return;
-            } else {
 
-                cotizacionSection.style.display = 'none';
-                encargoSection.style.display = 'block';
-            }
 
-        });
 
-        btnAtras.addEventListener('click', () => {
-            cotizacionSection.style.display = 'block';
-            encargoSection.style.display = 'none';
-        });
+
+            btnAtras.addEventListener('click', () => {
+                cotizacionSection.style.display = 'block';
+                encargoSection.style.display = 'none';
+            });
 
         // Llenar formulario y gestionar eventos
         form.addEventListener('submit', (e) => {
@@ -294,9 +281,22 @@ fetch('precios.json')
             const tarjetaEncontrada = tarjetas.find(tarjeta => tarjeta.numeroPedido === numeroPedidoBuscado);
 
             if (tarjetaEncontrada) {
-                resultadoSeguimiento.textContent = `Estado del pedido (${numeroPedidoBuscado}): En proceso de impresión`;
+
+                Swal.fire({
+                    title: `Estado de pedido: ${numeroPedidoBuscado}`,
+                    text: `En proceso de impresión`,
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                })
+
             } else {
-                resultadoSeguimiento.textContent = `Pedido (${numeroPedidoBuscado}) no encontrado`;
+                Swal.fire({
+                    title: `Estado de pedido: ${numeroPedidoBuscado}`,
+                    text: `No encontrado`,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                })
+
             }
 
             numeroPedidoInput.value = '';
@@ -307,7 +307,6 @@ fetch('precios.json')
         document.addEventListener('DOMContentLoaded', () => {
             if (localStorage.getItem('tarjetas')) {
                 tarjetas = JSON.parse(localStorage.getItem('tarjetas'));
-
                 contadorImpresiones = tarjetas.length;
                 const contadorElement = document.getElementById('contadorImpresiones');
                 contadorElement.textContent = `Pedidos a realizar: ${contadorImpresiones}`;
@@ -324,5 +323,3 @@ fetch('precios.json')
             confirmButtonText: 'OK'
         });
     });
-
-

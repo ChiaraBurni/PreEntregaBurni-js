@@ -105,10 +105,10 @@
                 <div class="card">
                     <div id="cotizacion" class="form-step">
                         <h3>Cotización:</h3>
-
-                        <label for="cantidad">Cantidad a imprimir: </label>
-                        <input id="cantidad" type="number" class="input">
-
+                        <div class="form-group">
+                            <label for="cantidad">Cantidad a imprimir: </label>
+                            <input id="cantidad" type="number" class="input">
+                        </div>
                         <div class="form-group">
                             <label for="tipoImpresion">Tipo de impresión:</label>
                             <select name="tipoImpresion" id="tipoImpresion" class="form-casilla" required>
@@ -119,9 +119,12 @@
                         </div>
 
                         <!--agrega opciones de terminacion con javascript-->
-                        <div id="divTerminacion"></div>
-                        <button type="button" id="btnCalcular">Calcular Precio</button>
-                        <button type="button" id="btnSiguiente">Siguiente</button>
+                        <div class="form-group">
+                            <div id="divTerminacion"></div>
+                        </div>
+
+                        
+                        <button class="form-btn" type="button" id="btnSiguiente">Siguiente</button>
                     </div>
                     <div id="encargo" class="form-step" style="display: none;">
 
@@ -142,7 +145,7 @@
                             <label for="tel">Teléfono:</label>
                             <input type="tel" name="tel" id="tel" class="input" autocomplete="tel" required>
                         </div>
-                        <button type="button" id="btnAtras">Atrás</button>
+                        <button class="form-btn" type="button" id="btnAtras">Atrás</button>
                         <button class="form-btn" type="submit">Enviar</button>
                         <p>Utilizaremos tus datos personales solo con el fin de gestionar el pedido</p>
 
