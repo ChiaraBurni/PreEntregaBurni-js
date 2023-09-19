@@ -10,7 +10,6 @@ class Tarjeta {
     }
 }
 
-
 //precios del JSON 
 let PRECIO_LASER, PRECIO_OFFSET;
 
@@ -41,6 +40,7 @@ const btnSiguiente = document.getElementById('btnSiguiente');
 const btnAtras = document.getElementById('btnAtras');
 const cotizacionSection = document.getElementById('cotizacion');
 const encargoSection = document.getElementById('encargo');
+const botonIrAlFormulario = document.getElementById('btnIrForm');
 
 //reset formulario!
 function resetForm() {
@@ -55,6 +55,11 @@ function resetForm() {
     cotizacionSection.style.display = 'block';
     encargoSection.style.display = 'none';
 }
+
+//bajar al formulario
+btnIrForm.addEventListener('click', () => {
+    window.location.href = '#form';
+});
 
 //cargar los precios desde el archivo JSON
 fetch('precios.json')
@@ -104,10 +109,11 @@ fetch('precios.json')
 
             if (isNaN(cantidad) || cantidad <= 0) {
                 Swal.fire({
-                    title: 'Error!',
-                    text: 'Cantidad Inválida. Ingresa una cantidad mayor a 0',
+                    title: '¡Cantidad Inválida!',
+                    text: 'Ingresa una cantidad mayor a 0',
                     icon: 'error',
-                    confirmButtonText: 'OK'
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#EE8F33'
                 });
             } else {
                 const tipo = tipoImpresion.value;
@@ -116,7 +122,8 @@ fetch('precios.json')
                 Swal.fire({
                     title: 'El precio total es:',
                     text: `$${precioTotal}`,
-                    confirmButtonText: 'OK'
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#EE8F33'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         document.getElementById('precioTotal').innerHTML = `<strong>Precio Total: $${precioTotal}</strong>`;
@@ -126,18 +133,12 @@ fetch('precios.json')
                 });
             }
         });
-       
 
 
-
-
-
-
-
-            btnAtras.addEventListener('click', () => {
-                cotizacionSection.style.display = 'block';
-                encargoSection.style.display = 'none';
-            });
+        btnAtras.addEventListener('click', () => {
+            cotizacionSection.style.display = 'block';
+            encargoSection.style.display = 'none';
+        });
 
         // Llenar formulario y gestionar eventos
         form.addEventListener('submit', (e) => {
@@ -186,14 +187,15 @@ fetch('precios.json')
             Swal.fire({
                 title: `Tu número de pedido es: ${numeroPedido}`,
                 icon: 'success',
-                confirmButtonText: 'OK'
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#EE8F33'
             }).then((result) => {
                 if (result.isConfirmed) {
                     Swal.fire(
                         {
                             title: 'Pedido exitoso',
-                            text: `En breve, nos pondremos en contacto contigo para finalizar el proceso de pago.
-                        Ten en cuenta que tu pedido no será procesado hasta que hayamos recibido el importe correspondiente en nuestra cuenta`
+                            text: `Pronto nos comunicaremos contigo para gestionar tu pedido y completar el pago`,
+                            confirmButtonColor: '#EE8F33'
                         })
                 }
             })
@@ -202,8 +204,6 @@ fetch('precios.json')
             resetForm();
 
         });
-
-
 
         // Terminación dependiendo del tipo de impresión
         tipoImpresion.addEventListener("change", () => {
@@ -267,7 +267,6 @@ fetch('precios.json')
             }
         });
 
-
         //Buscador de pedidos
         const formSeguimiento = document.getElementById("formSeguimiento");
         const resultadoSeguimiento = document.getElementById("resultadoSeguimiento");
@@ -286,7 +285,8 @@ fetch('precios.json')
                     title: `Estado de pedido: ${numeroPedidoBuscado}`,
                     text: `En proceso de impresión`,
                     icon: 'success',
-                    confirmButtonText: 'OK'
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#EE8F33'
                 })
 
             } else {
@@ -294,14 +294,14 @@ fetch('precios.json')
                     title: `Estado de pedido: ${numeroPedidoBuscado}`,
                     text: `No encontrado`,
                     icon: 'error',
-                    confirmButtonText: 'OK'
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#EE8F33'
                 })
 
             }
 
             numeroPedidoInput.value = '';
         });
-
 
         // Cargar datos desde localStorage
         document.addEventListener('DOMContentLoaded', () => {
@@ -320,6 +320,7 @@ fetch('precios.json')
         Swal.fire({
             text: 'Error al cargar el formulario',
             icon: 'error',
-            confirmButtonText: 'OK'
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#EE8F33'
         });
     });

@@ -1,40 +1,72 @@
 html {
     font-size: 16px;
     height: 100%;
-
 }
 
 body {
     padding: 0;
     margin: 0;
     height: 100%;
-    background-color: whitesmoke;
+    background-color: #f5f5f5;
     font-family: 'Montserrat', sans-serif;
 }
 
 /*Navbar*/
 
+.navbar {
+    background-color: #f09c43;
+}
+.navbarContainer {
+    margin:  .75rem;
+    padding: .75rem;
+    background-color: white;
+    border-radius: 0.5rem;
+}
+
 .navbarLogo {
-    height: 1.5rem;
+    height: 2.5rem;
     width: auto;
 }
 
 /*body*/
+h1, h2{
+    font-family: 'Roboto', sans-serif;
+    color: #f09c43;
+}
+
+h1 span {
+    color: black;
+}
+
+h3 {
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    color: black;
+}
+
+.btnIrForm{
+    font-size: 20px;
+    width: auto;
+    height: 3rem;
+    background: #EE8F33;
+    color: #fff;
+    margin: 1rem 0;
+    border: none;
+}
+
+
 
 
 /*formulario*/
+
 .form {
     display: flex;
     flex-direction: column;
     max-width: 35rem;
     margin: 0 auto;
-}
-
-.form-step {
-    background-color: whitesmoke;
+    padding: 3rem;
+    margin: 2rem auto;
     box-shadow: 0px 0px 0.7rem black;
-    border-radius: 0.5rem;
-    padding: .5rem;
 }
 
 .form-group {
@@ -44,52 +76,52 @@ body {
 
 }
 
-.form-group label{
+.form-group label {
     font-weight: bold;
     font-size: 16px;
 }
 
-.form-group legend{
+.form-group legend {
     font-weight: bold;
     font-size: 16px;
+    margin-top: 1rem;
 }
 
 .form-group input {
-    background: none;
+    background-color: #F4DFC9;
     border: none;
     border: .1rem solid #e0e0e0;
-    border-radius: 0;
     box-shadow: none;
-    margin: .5rem;
-}
-
-.pedidos {
-    max-width: 100%;
-    padding: 3rem;
-    margin: 2rem auto;
-    border-radius: 0.5rem;
-    box-shadow: 0px 0px 0.7rem black;
+    margin-bottom: 1rem;
 }
 
 
 .form-btn {
-    height: auto;
-    border-radius: 5px;
-    background: #f09c43;
+    font-size: 20px;
+    width: auto;
+    height: 3rem;
+    background: #EE8F33;
     color: #fff;
     transition: all 0.3s ease-in-out;
     margin: 1rem 0;
+    border: none;
 }
 
 .form-btn:hover {
-    background: #EE8F33;
+    background: #f09c43;
 }
 
 .form p {
-    text-decoration: underline;
+    margin: .75rem 0;
+    padding: .5rem;
+    border: 2px solid black;
 }
 
 /*Footer*/
+footer {
+    background-color: #f09c43;
+    border-top: .1rem solid black;
+}
 .footerLista {
     list-style: none;
 }

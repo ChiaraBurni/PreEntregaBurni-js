@@ -19,16 +19,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,600;1,100;1,200;1,300;1,400;1,500;1,600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&family=Roboto:wght@500;700&display=swap"
         rel="stylesheet">
-</head>
 
 <body>
     <div class="formulario">
         <div class="formularioNav">
             <header>
-                <nav class="navbar bg-body-tertiary py-3">
-                    <div class="container">
+                <nav class="navbar">
+                    <div class="navbarContainer">
                         <a class="navbar-brand" href="#">
                             <img src="./imagen/icon.png" alt="Logo" class="navbarLogo">
                         </a>
@@ -37,7 +36,6 @@
             </header>
         </div>
         <main class="py-4">
-            <h1 class="text-center m-4">Tarjetas Personalizadas - Copy.ar</h1>
             <div id="formularioGeneral">
                 <div class="formularioGeneral-general container">
                     <div class="row">
@@ -45,17 +43,18 @@
                             <img src="./imagen/tarjetaNaranja.jpeg" alt="tarjeta" class="img-fluid rounded">
                         </div>
 
-                        <div class="col-md-6 mb-4">
-                            <p>En el ámbito empresarial, las tarjetas de presentación son esenciales para causar
-                                una impresión duradera. En Copy.ar, te ofrecemos dos opciones líderes: impresión láser y
-                                offset.
-                                Cada método tiene características únicas que se adaptan a tus necesidades. Explora
-                                nuestra
-                                comparativa y elige según tus preferencias de tiempo, calidad y personalización. Ambas
-                                opciones
-                                brindan resultados de alta calidad para crear tarjetas que reflejen tu identidad
-                                profesional.
+                        <div class="col-md-6 mb-4 intro">
+                            <h1 class="text-center m-4">Tarjetas Personalizadas - <span>Copy</span>.ar</h1>
+                            <p>En el mundo empresarial, las tarjetas de presentación de Copy.ar ofrecen dos opciones:
+                                impresión láser y offset. Elige según tus preferencias de tiempo y calidad para crear
+                                tarjetas que reflejen tu identidad profesional.
                             </p>
+
+
+                            <div class="d-grid col-6 mx-auto">
+
+                                <button class="btnIrForm" id="btnIrForm" type="button">¡Encarga tus tarjetas!</button>
+                            </div>
                         </div>
                     </div>
 
@@ -63,7 +62,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6 mb-4" id="formularioGeneral-laser" style="order: 1;">
-                            <h2 class="text-center">Impresión láser:</h2>
+                            <h2 class="text-center">Impresión Láser:</h2>
                             <ul>
                                 <li><strong>Color y acabado:</strong> Se ofrece impresión a todo color en el frente de
                                     la tarjeta, con la opción de imprimir en la parte posterior. Las tarjetas pueden
@@ -77,7 +76,7 @@
                             </ul>
                         </div>
                         <div class="col-md-6 mb-4" id="formularioGeneral-offset">
-                            <h2 class="text-center">Impresión offset:</h2>
+                            <h2 class="text-center">Impresión Offset:</h2>
                             <ul>
                                 <li><strong>Papel y color:</strong> Las tarjetas se imprimen en papel ilustración de
                                     mayor gramaje, 350 gramos. La impresión puede ser a todo color en el frente, con la
@@ -99,57 +98,62 @@
                     </div>
                 </div>
             </div>
-            <h2>¡Haz tu pedido!</h2>
             <!--Formulario-->
             <form class="form" id="form">
-                <div class="card">
-                    <div id="cotizacion" class="form-step">
-                        <h3>Cotización:</h3>
-                        <div class="form-group">
-                            <label for="cantidad">Cantidad a imprimir: </label>
-                            <input id="cantidad" type="number" class="input">
-                        </div>
-                        <div class="form-group">
-                            <label for="tipoImpresion">Tipo de impresión:</label>
-                            <select name="tipoImpresion" id="tipoImpresion" class="form-casilla" required>
-                                <option value="" disabled selected>Selecciona una opción</option>
-                                <option value="laser">Laser</option>
-                                <option value="offset">Offset</option>
-                            </select>
-                        </div>
+                <div id="cotizacion" class="form-step">
+                    <h3>Cotización</h3>
+                    <div class="form-group">
+                        <label for="cantidad">Cantidad a imprimir: </label>
+                        <input id="cantidad" type="number" class="input">
+                    </div>
+                    <div class="form-group">
+                        <label for="tipoImpresion">Tipo de impresión:</label>
+                        <select name="tipoImpresion" id="tipoImpresion" class="form-casilla" required>
+                            <option value="" disabled selected>Selecciona una opción</option>
+                            <option value="laser">Laser</option>
+                            <option value="offset">Offset</option>
+                        </select>
+                    </div>
 
-                        <!--agrega opciones de terminacion con javascript-->
-                        <div class="form-group">
-                            <div id="divTerminacion"></div>
-                        </div>
+                    <!--agrega opciones de terminacion con javascript-->
+                    <div class="form-group">
+                        <div id="divTerminacion"></div>
+                    </div>
 
-                        
+                    <div class="d-grid col-6 mx-auto">
                         <button class="form-btn" type="button" id="btnSiguiente">Siguiente</button>
                     </div>
-                    <div id="encargo" class="form-step" style="display: none;">
+                </div>
+                <div id="encargo" class="form-step" style="display: none;">
 
-                        <p id="precioTotal"><strong>Precio Total: $0</strong></p>
-                        <h3>Encargos:</h3>
 
-                        <div class="form-group">
-                            <label for="nombre">Nombre:</label>
-                            <input type="text" name="nombre" id="nombre" class="input" autocomplete="name" required>
-                        </div>
+                    <h3>Encargos</h3>
 
-                        <div class="form-group">
-                            <label for="email">Email:</label>
-                            <input type="email" name="email" id="email" class="input" autocomplete="email" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="tel">Teléfono:</label>
-                            <input type="tel" name="tel" id="tel" class="input" autocomplete="tel" required>
-                        </div>
-                        <button class="form-btn" type="button" id="btnAtras">Atrás</button>
-                        <button class="form-btn" type="submit">Enviar</button>
-                        <p>Utilizaremos tus datos personales solo con el fin de gestionar el pedido</p>
-
+                    <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" name="nombre" id="nombre" class="input" autocomplete="name" required>
                     </div>
+
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" name="email" id="email" class="input" autocomplete="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tel">Teléfono:</label>
+                        <input type="tel" name="tel" id="tel" class="input" autocomplete="tel" required>
+                    </div>
+                    <p class="text-center" id="precioTotal"><strong>Precio Total: $0</strong></p>
+
+                    <div class="row">
+                        <div class="d-grid col-6 mx-auto">
+                            <button class="form-btn" type="button" id="btnAtras">Atrás</button>
+                        </div>
+                        <div class="d-grid col-6 mx-auto">
+                            <button class="form-btn" type="submit">Enviar</button>
+                        </div>
+                    </div>
+
                 </div>
             </form>
 
@@ -157,7 +161,7 @@
             <!--seguimiento de pedidos-->
             <div id="seguimientoPedidos" class="form">
                 <div class="pedidos">
-                    <h2 class="text-center">Seguimiento de Pedidos</h2>
+                    <h3 class="text-center">Seguimiento de Pedidos</h3>
                     <form id="formSeguimiento">
                         <div class="form-group">
                             <label for="numeroPedido">Número de Pedido:</label>
@@ -165,10 +169,10 @@
                         </div>
                         <!--contador de pedidos-->
                         <div>
-                            <p class="contadorImpresiones" id="contadorImpresiones">Pedidos a realizar: 0</p>
+                            <p class="text-center" id="contadorImpresiones">Pedidos a realizar: 0</p>
                         </div>
 
-                        <div class="form-group">
+                        <div class="d-grid col-6 mx-auto">
                             <button type="submit" class="form-btn">Buscar Pedido</button>
                         </div>
                     </form>
